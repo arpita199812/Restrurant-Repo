@@ -1,0 +1,21 @@
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: arpita199812/s3-sync-action@main
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: my-first-static-website-hosting1
+        AWS_ACCESS_KEY_ID: AKIAWF5PWDYOIOWMT5W6
+        AWS_SECRET_ACCESS_KEY: 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
+        AWS_REGION: 'ap-south-1'   # optional: defaults to us-east-1
+        SOURCE_DIR: 'public'      # optional: defaults to entire repository
